@@ -1,0 +1,41 @@
+.base {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  transition: background-color 0.2s;
+}
+.solid {
+  composes: base;
+  color: var(--white);
+  background-color: var(--violet-9);
+
+  &:hover {
+    background-color: var(--violet-11);
+  }
+}
+.outline {
+  composes: base;
+  color: var(--violet-9);
+  background-color: transparent;
+  box-shadow: var(--violet-9) 0px 0px 0px 1px inset;
+
+  &:hover {
+    background-color: var(--violet-3);
+  }
+}
+.small {
+  font-size: 12px;
+  padding: 10px 16px;
+}
+.medium {
+  font-size: 14px;
+  padding: 11px 20px;
+}
+.large {
+  font-size: 16px;
+  padding: 12px 24px;
+}

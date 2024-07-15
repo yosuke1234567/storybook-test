@@ -1,0 +1,9 @@
+.base {
+  padding: 0.5em 1em;
+  border-radius: 3em;
+  border: 1px solid var(--slate-7);
+
+  &:focus-visible {
+    outline: 1px solid var(--violet-7);
+  }
+}

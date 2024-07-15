@@ -1,48 +1,44 @@
-import React from 'react';
-import './button.css';
+import { ReactNode , ComponentPropsWithoutRef, createElement } from 'react';
+import styles from './button.module.css';
 
-interface ButtonProps {
+type ButtonProps<T extends 'button' | 'a'> = ComponentPropsWithoutRef<T> & {
+  /**
+   * Element type "button" or "a"
+   */
+  as?: T;
   /**
    * Is this the principal call to action on the page?
    */
-  primary?: boolean;
-  /**
-   * What background color to use
-   */
-  backgroundColor?: string;
+  variant?: 'solid' | 'outline';
   /**
    * How large should the button be?
    */
   size?: 'small' | 'medium' | 'large';
   /**
-   * Button contents
+   * Children
    */
-  label: string;
-  /**
-   * Optional click handler
-   */
-  onClick?: () => void;
+  children: ReactNode;
 }
 
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({
-  primary = false,
+export const Button = <T extends 'button' | 'a'>({
+  as,
+  variant = 'solid',
   size = 'medium',
-  backgroundColor,
-  label,
+  children,
   ...props
-}: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+}: ButtonProps<T>) => {
+  const elementType = as || 'button'
   return (
-    <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
-    >
-      {label}
-    </button>
+    createElement(
+      elementType,
+      {
+        ...props,
+        className: `${styles[variant]} ${styles[size]}${props.className ? ` ${props.className}` : ''}`,
+      },
+      children
+    )
   );
 };
