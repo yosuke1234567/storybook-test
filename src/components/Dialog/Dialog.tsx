@@ -1,20 +1,20 @@
 import { MouseEvent, ReactNode, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import styles from './dialog.module.css'
+import styles from './Dialog.module.css'
 
 type DialogProps = {
   children: ReactNode
   isOpen: boolean
   onClose: () => void
-  canBackdropClose?: boolean
+  shouldCloseOnOverlayClick?: boolean
 }
 
-export const Dialog = ({ children, isOpen, onClose, canBackdropClose }: DialogProps) => {
+export const Dialog = ({ children, isOpen, onClose, shouldCloseOnOverlayClick }: DialogProps) => {
   const [shouldOpen, setShouldOpen] = useState<boolean>()
   const ref = useRef<HTMLDivElement>(null)
 
   const handleBackdropClick = (event: MouseEvent) => {
-    if (!canBackdropClose) return
+    if (!shouldCloseOnOverlayClick) return
     if (event.target === ref.current) {
       ref.current.classList.add(styles.isClose)
       onClose()

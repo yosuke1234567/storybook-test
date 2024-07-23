@@ -1,41 +1,47 @@
 .base {
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: 3em;
+  font-weight: 700;
   cursor: pointer;
-  display: inline-block;
-  line-height: 1;
   transition: background-color 0.2s;
 }
 .solid {
   composes: base;
   color: var(--white);
   background-color: var(--violet-9);
-
-  &:hover {
-    background-color: var(--violet-11);
-  }
 }
+.solid:hover {
+  background-color: var(--violet-11);
+}
+
 .outline {
   composes: base;
   color: var(--violet-9);
   background-color: transparent;
-  box-shadow: var(--violet-9) 0px 0px 0px 1px inset;
-
-  &:hover {
-    background-color: var(--violet-3);
-  }
+  box-shadow: inset var(--violet-9) 0px 0px 0px 1px;
 }
+.outline:hover {
+  background-color: var(--violet-3);
+}
+
 .small {
+  min-width: 60px;
+  height: 24px;
+  padding: 0 8px;
   font-size: 12px;
-  padding: 10px 16px;
 }
 .medium {
+  min-width: 72px;
+  height: 32px;
+  padding: 0 12px;
   font-size: 14px;
-  padding: 11px 20px;
 }
 .large {
+  min-width: 100px;
+  height: 48px;
+  padding: 0 24px;
   font-size: 16px;
-  padding: 12px 24px;
 }

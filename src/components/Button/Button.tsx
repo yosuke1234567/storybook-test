@@ -1,33 +1,23 @@
 import { ReactNode , ComponentPropsWithoutRef, createElement } from 'react';
-import styles from './button.module.css';
+import styles from './Button.module.css';
 
 type ButtonProps<T extends 'button' | 'a'> = ComponentPropsWithoutRef<T> & {
   /**
    * Element type "button" or "a"
    */
   as?: T;
-  /**
-   * Is this the principal call to action on the page?
-   */
   variant?: 'solid' | 'outline';
-  /**
-   * How large should the button be?
-   */
   size?: 'small' | 'medium' | 'large';
-  /**
-   * Children
-   */
+  disabled?: boolean;
   children: ReactNode;
 }
 
-/**
- * Primary UI component for user interaction
- */
 export const Button = <T extends 'button' | 'a'>({
   as,
   variant = 'solid',
   size = 'medium',
   children,
+  disabled,
   ...props
 }: ButtonProps<T>) => {
   const elementType = as || 'button'
@@ -36,6 +26,7 @@ export const Button = <T extends 'button' | 'a'>({
       elementType,
       {
         ...props,
+        [elementType === 'a' ? 'aria-disabled' : 'disabled']: disabled,
         className: `${styles[variant]} ${styles[size]}${props.className ? ` ${props.className}` : ''}`,
       },
       children
