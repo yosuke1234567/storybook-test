@@ -1,0 +1,38 @@
+.tabList {
+  display: flex;
+  box-shadow: inset 0 -1px var(--slate-6);
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 20px;
+  border: none;
+  background-color: transparent;
+  color: var(--slate-11);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.3s;
+
+  --selected-color: var(--violet-9);
+}
+.tab::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  transition: background-color 0.3s;
+}
+.tab[aria-selected="true"] {
+  color: var(--selected-color);
+}
+.tab[aria-selected="true"]::after {
+  background-color: var(--selected-color);
+}
