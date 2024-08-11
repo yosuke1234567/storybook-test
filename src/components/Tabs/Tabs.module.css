@@ -36,3 +36,7 @@
 .tab[aria-selected="true"]::after {
   background-color: var(--selected-color);
 }
+.tab:disabled {
+  color: var(--slate-8);
+  cursor: default;
+}

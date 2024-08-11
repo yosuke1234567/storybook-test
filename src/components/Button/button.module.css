@@ -16,6 +16,10 @@
 .solid:hover {
   background-color: var(--violet-11);
 }
+.solid[aria-disabled="true"], .solid:disabled {
+  background-color: var(--slate-7);
+  cursor: default;
+}
 
 .outline {
   composes: base;

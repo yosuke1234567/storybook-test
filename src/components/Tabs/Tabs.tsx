@@ -7,12 +7,12 @@ type TabsContextValue = {
   setValue: React.Dispatch<React.SetStateAction<string>>
 }
 
+const TabsContext = createContext<TabsContextValue | null>(null)
+
 type TabsRootProps = {
   defaultValue?: string
   children: React.ReactNode
 }
-
-const TabsContext = createContext<TabsContextValue | null>(null)
 
 const useTabsContext = () => {
   const context = useContext(TabsContext)
@@ -40,7 +40,7 @@ const TabList = ({ children }: TabListProps) => {
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (!ref.current) return
-    let tabTriggers = Array.from(ref.current.querySelectorAll('[role="tab"]')) as HTMLElement[]
+    let tabTriggers = Array.from(ref.current.querySelectorAll('[role="tab"]:not(:disabled)')) as HTMLElement[]
     let focusedIndex = tabTriggers.indexOf(document.activeElement as HTMLElement)
 
     if (event.key === 'ArrowLeft') {
@@ -70,10 +70,11 @@ const TabList = ({ children }: TabListProps) => {
 
 type TabProps = {
   value: string
+  disabled?: boolean
   children: React.ReactNode
 }
 
-const Tab = ({ value, children }: TabProps) => {
+const Tab = ({ value, disabled, children }: TabProps) => {
   const context = useTabsContext()
   const isSelected = value === context.value
 
@@ -84,6 +85,7 @@ const Tab = ({ value, children }: TabProps) => {
       aria-controls={`${context.tabsRootId}-panel-${value}`}
       aria-selected={isSelected}
       tabIndex={isSelected ? 0 : -1}
+      disabled={disabled}
       onClick={() => context.setValue(value)}
       className={styles.tab}
     >

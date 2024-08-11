@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { Button } from './Button';
+import { ComponentPropsWithoutRef, HTMLAttributeAnchorTarget } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Button> = {
@@ -34,6 +35,52 @@ export const Outline: Story = {
     variant: 'outline'
   },
 };
+
+export const Anchor = {
+  args: {
+    as: 'a',
+    href: '#',
+    target: '_brank',
+    onClick: fn(() => console.log('click'))
+  }
+}
+
+const Link = ({to, ...props}: Omit<ComponentPropsWithoutRef<"a">, "href"> & {to: string}) => {
+  return (
+    <a {...props} href={to} onClick={(e) => {
+      if (props.onClick) props.onClick(e)
+
+      if (!e.defaultPrevented)  {
+        e.preventDefault()
+        window.top!.history.pushState('', '', to)
+      }
+    }} />
+  )
+}
+export const WithCustomComponent = () => {
+  return (
+    <Button as={Link} to='./?foo=bar' target='_self'>
+      Link
+    </Button>
+  )
+}
+// export const WithCustomComponent = () => {
+//   return (
+//     <HashRouter window={window}>
+//       <Routes>
+//         <Route path='/' element={
+//           <>
+//           <Button as={Link} to='./foo' target='_self' disabled>
+//             Link
+//           </Button>
+//           <Link to='./foo' onClick={()=> console.log("click")}>pure Link</Link>
+//           </>
+//         } />
+//         <Route path='/foo' element="foo" />
+//       </Routes>
+//     </HashRouter>
+//   )
+// }
 
 // export const Large: Story = {
 //   args: {
