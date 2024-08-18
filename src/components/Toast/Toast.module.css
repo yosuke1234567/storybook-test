@@ -1,0 +1,57 @@
+.container {
+  position: fixed;
+  display: flex;
+  align-items: flex-start;
+  bottom: 24px;
+  right: min(24px, 5vw);
+  max-width: 90vw;
+  padding: 1em 3em 1em 1em;
+  border: 1px solid var(--slate-4);
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0px 8px 20px -8px rgba(4, 8, 12, 0.2);
+  animation: slideIn 0.3s backwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.close {
+  position: absolute;
+  right: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background-color: inherit;
+  cursor: pointer;
+}
+.close:hover {
+  filter: brightness(0.9);
+}
+.close::before, .close::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  border-radius: 1px;
+  background-color: var(--slate-12);
+}
+.close::before {
+  transform: rotate(45deg);
+}
+.close::after {
+  transform: rotate(-45deg);
+}
