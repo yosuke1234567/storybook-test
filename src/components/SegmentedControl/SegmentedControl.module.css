@@ -1,0 +1,36 @@
+.group {
+  display: flex;
+  padding: 0.5em;
+  border-radius: 4px;
+  background-color: var(--slate-3);
+}
+
+.item {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.input {
+  width: 0;
+  height: 0;
+  margin: 0;
+  opacity: 0;
+}
+
+.itemContent {
+  position: relative;
+  padding: 0.25em 0.75em;
+  border-radius: 4px;
+}
+
+.input:focus-visible+.itemContent {
+  outline-offset: 2px;
+  outline: 2px solid var(--violet-7);
+}
+
+.input:checked+.itemContent {
+  z-index: 1;
+  background-color: var(--violet-9);
+  border-color: var(--violet-9);
+  color: var(--white);
+}
